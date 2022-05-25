@@ -18,13 +18,27 @@ const ship={
             this.x+=5;
         }
         ctx.fillStyle=this.bg;
-        ctx.drawImage(naveImage,this.x,this.y,100,90);
         for(var i=0;i<missiles.length;i++){
             var m=missiles[i];
             ctx.fillRect(m.x,m.y-=5,m.w,m.h);
         }
     }
 }
+function drawShip(){
+    ctx.fillStyle='white';
+    ctx.moveTo(ship.x,ship.y);
+    ctx.lineTo(ship.x+ship.w,ship.y);
+    ctx.lineTo(ship.x+ship.w,ship.y+ship.h);
+    ctx.lineTo(ship.x,ship.y+ship.h);
+    ctx.lineTo(ship.x,ship.y);
+    ctx.fill();
+}
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    drawShip();
+    ship.render();
+}
+setInterval(animate,6);
 function dispararBalas(e){
     if(e.key='w'){
         missiles.push({
@@ -35,4 +49,26 @@ function dispararBalas(e){
         });
     }
 }
-document.addEventListener("keydown", dispararBalas);
+document.addEventListener("keydown", function (event) {
+    if (event.key == 'a') {
+        ship.direccion = "left";
+        if (ship.x < ship.w * 0.2 - 130) {
+            ship.x += 0;
+        }
+    }else if(event.key == 'd'){
+        ship.direccion = "right";
+        if (ship.x > ship.w - 110) {
+            ship.x -= 0;
+        }
+    }
+})
+document.addEventListener("keyup", function (event) {
+    if (event.key == 'a') {
+        ship.x += 0;
+        ship.direccion = "";
+    }else if(event.key == 'd'){
+        ship.x -= 0;
+        ship.direccion = "";
+    }
+})
+    document.addEventListener("keydown", dispararBalas);
