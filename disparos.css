@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto:wght@300&display=swap');
+body{
+    font-family: 'Roboto', sans-serif;
+}
+#my_canvas{
+    border: 1px solid black;
+    width: 80vw;
+    height: 80vh;
+    background-color: black;
+}
